@@ -1,0 +1,49 @@
+ChromeDriver driver = new ChromeDriver();
+		
+		//to maximize the browser 
+		driver.manage().window().maximize();
+				  
+		//to load application url
+		driver.get("http://leaftaps.com/opentaps/control/main");
+				  
+		//to locate the element using Id locator 
+		WebElement username =driver.findElementById("username");
+				  
+		//type a value in a webelement
+		username.sendKeys("demosalesmanager");
+				  
+		//to type password in the password text field using id locator
+		driver.findElementById("password").sendKeys("crmsfa");
+				  
+		//locate element using name locator
+		//driver.findElementByName("PASSWORD").sendKeys("crmsfa");
+				  
+		//to click on the login button
+		driver.findElementByClassName("decorativeSubmit").click();
+				  
+		//linkText locator for the html link elements(in <a> tag)
+		driver.findElementByLinkText("CRM/SFA").click();
+		
+		driver.findElementByLinkText("Contacts").click();
+		driver.findElementByLinkText("Create Contact").click();
+		driver.findElementById("firstNameField").sendKeys("Arun");
+		driver.findElementById("lastNameField").sendKeys("Kumar");
+		driver.findElementById("createContactForm_firstNameLocal").sendKeys("ArunLocal");
+		driver.findElementById("createContactForm_lastNameLocal").sendKeys("KumarLocal");
+		driver.findElementById("createContactForm_departmentName").sendKeys("Engineering");
+		driver.findElementByName("description").sendKeys("TestDescription");
+		driver.findElementByClassName("inputBox").sendKeys("aba@test.com");
+		
+		WebElement state = driver.findElementByClassName("generalStateProvinceGeoId");
+		Select newyork=new Select(state);
+		newyork.selectByVisibleText("New York");
+		
+		driver.findElementByClassName("smallSubmit").click();
+		
+		
+		
+		
+
+	}
+
+}
