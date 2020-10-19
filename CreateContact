@@ -1,0 +1,64 @@
+package week2Day2;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class CreateContact {
+
+	public static void main(String[] args) {
+		
+		WebDriverManager.chromedriver().setup();
+		ChromeDriver driver = new ChromeDriver();
+		
+		//to maximize the browser 
+		driver.manage().window().maximize();
+				  
+		//to load application url
+		driver.get("http://leaftaps.com/opentaps/control/main");
+				  
+		//to locate the element using Id locator 
+		WebElement username =driver.findElementById("username");
+				  
+		//type a value in a webelement
+		username.sendKeys("demosalesmanager");
+				  
+		//to type password in the password text field using id locator
+		driver.findElementById("password").sendKeys("crmsfa");
+				  
+		//locate element using name locator
+		//driver.findElementByName("PASSWORD").sendKeys("crmsfa");
+				  
+		//to click on the login button
+		driver.findElementByClassName("decorativeSubmit").click();
+				  
+		//linkText locator for the html link elements(in <a> tag)
+		driver.findElementByLinkText("CRM/SFA").click();
+		
+		driver.findElementByLinkText("Contacts").click();
+		driver.findElementByLinkText("Create Contact").click();
+		driver.findElementById("firstNameField").sendKeys("Arun");
+		driver.findElementById("lastNameField").sendKeys("Kumar");
+		driver.findElementById("createContactForm_firstNameLocal").sendKeys("ArunLocal");
+		driver.findElementById("createContactForm_lastNameLocal").sendKeys("KumarLocal");
+		driver.findElementById("createContactForm_departmentName").sendKeys("Engineering");
+		driver.findElementByName("description").sendKeys("TestDescription");
+		driver.findElementByName("primaryEmail").sendKeys("abc@test.com");
+		
+		WebElement state = driver.findElementById("createContactForm_generalStateProvinceGeoId");
+		Select newyork=new Select(state);
+		newyork.selectByVisibleText("New York");
+		
+		driver.findElementByName("submitButton").click();
+		
+		driver.findElementByLinkText("Edit").click();
+		driver.findElementById("updateContactForm_description").clear();
+		driver.findElementById("updateContactForm_importantNote").sendKeys("TestContent");
+		driver.findElementByXPath("//input[@name='submitButton' and @value='Update']");
+		String title = driver.getTitle();
+		System.out.println(title);
+	}
+
+}
