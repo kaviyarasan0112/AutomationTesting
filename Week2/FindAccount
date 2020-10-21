@@ -1,0 +1,65 @@
+package week2Day1;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class FindAccount {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		//to setup chrome driver
+		
+				//WebDriverManager.chromedriver().setup();
+				System.setProperty("webdriver.chrome.driver", "./ChromeDriver/chromedriver.exe");
+					
+				String property = System.getProperty("webdriver.chrome.driver");
+				
+				System.out.println(property);
+							
+				//To open Chrome Browser
+				ChromeDriver driver = new ChromeDriver();
+								
+
+				//to maximize the browser 
+				driver.manage().window().maximize();
+		  
+				//to load application url
+				driver.get("http://leaftaps.com/opentaps/control/main");
+		  
+				//to locate the element using Id locator 
+				WebElement username =driver.findElementById("username");
+		  
+				//type a value in a webelement
+				username.sendKeys("demosalesmanager");
+		  
+				//to type password in the password text field using id locator
+				driver.findElementById("password").sendKeys("crmsfa");
+		  
+		  
+				//to click on the login button
+				driver.findElementByClassName("decorativeSubmit").click();
+		  
+				//linkText locator for the html link elements(in <a> tag)
+				driver.findElementByLinkText("CRM/SFA").click();
+				
+				driver.findElementByXPath("(//a[contains(text(),'Accounts')])[1]").click();
+				driver.findElementByXPath("//a[contains(text(),'Find Accounts')]").click();
+				WebElement findAccount = driver.findElementByXPath("(//input[@name='accountName'])[2]");
+				findAccount.sendKeys("Credit Limited Account");
+				
+				driver.findElementByXPath("//button[text()='Find Accounts']").click();
+				Thread.sleep(3000);
+				driver.findElementByLinkText("accountlimit100").click();
+				driver.findElementByXPath("(//a[contains(text(),'Edit')])[1]").click();
+				
+				String textOfAccountName = driver.findElementByXPath("//input[@id='accountName']").getText();
+				String textOfTextDesc = driver.findElementByXPath("//textarea[@name='description']").getText();
+				String title = driver.getTitle();
+				System.out.println(textOfAccountName);
+				System.out.println(textOfTextDesc);
+				System.out.println(title);
+	}
+
+}
