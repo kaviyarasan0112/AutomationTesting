@@ -1,0 +1,174 @@
+Skip to content
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@kaviyarasan0112 
+Learn Git and GitHub without any code!
+Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
+
+
+TestLeafPages
+/
+SelOct2020
+1
+00
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+SelOct2020/Relative Xpath Syntax and Sample code.txt
+@TestLeafPages
+TestLeafPages Add files via upload
+Latest commit 9c828f5 5 days ago
+ History
+ 1 contributor
+139 lines (68 sloc)  2.45 KB
+  
+Relative Xpath:
+============
+Attribute Based:
+---------------------
+//TagName[@attribute = 'attribute value']
+
+//input[@type = 'password']
+
+Multiple Attributes
+------------------------
+//input[@class = 'inputLogin'][@type='password]
+
+//input[@class = 'inputLogin' and @type = 'password']
+
+//input[@class = 'inputLogin123' or @type = 'password']
+
+Text Based xpath:
+------------------------
+//TagName[text()='text value']
+
+//label[text()='Username']
+
+Collection Based xpath:
+-------------------------------
+(xpath)[index]
+
+(//input)[2]
+
+(//input[@class = 'inputLogin'])[2]
+
+(//input[@class = 'inputLogin'][@size='50'])[2]
+
+
+Partial Match
+-------------------
+//TagName[contains(text(),'partialvalue')]
+//h2[contains(text(),'Leaftaps')]
+
+//TagName[contains(@attribute,'partial value')]
+//label[contains(@for,'user')]
+
+Axes Based - Relationship Based xpath:
+===============================
+
+Parent - Child:
+--------------------
+parent xpath/TagName of the child
+
+//form[@id='login']/p[2]
+
+GrandParent to GrandChild:
+-------------------------------------
+GrandParent xpath//TagName of the Grand Child
+
+//form[@id='login']//label
+
+//form[@id='login']//label[text()='Password']
+//form[@id='login']//label[@for='password']
+
+Child to Parent
+============
+Child xpath/parent::tagname of the parent
+or
+Child xpath/..
+
+//label[@for='password']/parent::p
+//label[@for='password']/..
+
+GrandChild to GrandParent
+-------------------------------------
+GrandChild Xpath/ancestor::tagName of the GrandParent
+//input[@id='username']/ancestor::form
+
+GrandChild Xpath/../..
+//input[@id='username']/../..
+
+Elder Sibling to Younger Sibling
+-------------------------------------------
+Elder Sibling xpath/following-sibling::TagName of Younger Sibling
+
+//label[@for='username']/following-sibling::input
+
+Younger Sibling to Elder Sibling
+-------------------------------------------
+younger Sibling xpath/preceding-sibling::TagName of Elder Sibling
+
+//input[@id='username']/preceding-sibling::label
+
+Elder Cousin to Younger Cousin
+--------------------------------------------
+Elder Cousin xpath/following::tagname of the younger cousin
+
+//label[@for='username']/following::label
+
+Younger Cousin to Elder Cousin
+--------------------------------------------
+Younger Cousin xpath/preceding::tagname of the elder cousin
+
+//label[@for='password']/preceding::label
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
