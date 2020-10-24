@@ -1,0 +1,61 @@
+package week2Day2;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class DeleteLead {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		WebDriverManager.chromedriver().setup();
+		ChromeDriver driver = new ChromeDriver();
+		
+		//to maximize the browser 
+		driver.manage().window().maximize();
+				  
+		//to load application url
+		driver.get("http://leaftaps.com/opentaps/control/main");
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				  
+		//to locate the element using Id locator 
+		WebElement username =driver.findElementById("username");
+				  
+		//type a value in a webelement
+		username.sendKeys("demosalesmanager");
+				  
+		//to type password in the password text field using id locator
+		driver.findElementById("password").sendKeys("crmsfa");
+				  
+		//locate element using name locator
+		//driver.findElementByName("PASSWORD").sendKeys("crmsfa");
+				  
+		//to click on the login button
+		driver.findElementByClassName("decorativeSubmit").click();
+				  
+		//linkText locator for the html link elements(in <a> tag)
+		driver.findElementByLinkText("CRM/SFA").click();
+		
+		driver.findElementByLinkText("Leads").click();
+
+		driver.findElementByLinkText("Find Leads").click();
+		driver.findElementByLinkText("Phone").click();
+		driver.findElementByName("phoneAreaCode").sendKeys("987654321");
+		driver.findElementByLinkText("Find Leads").click();
+		WebElement lead = driver.findElementByLinkText("10036");
+		String text = lead.getText();
+		lead.click();
+		driver.findElementByLinkText("Delete").click();
+		
+		driver.findElementByLinkText("Find Leads").click();
+		driver.findElementByName("id").sendKeys(text);
+		
+		driver.findElementByXPath("//button[contains(text(),'Find Leads')]").click();
+		
+	}
+
+}
