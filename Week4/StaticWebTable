@@ -1,0 +1,43 @@
+package week4.day1;
+
+import java.util.List;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class WebTable {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		System.setProperty("webdriver.chrome.driver", "./ChromeDriver/chromedriver.exe");
+		
+		String property = System.getProperty("webdriver.chrome.driver");
+		
+		System.out.println(property);
+					
+		//To open Chrome Browser
+		ChromeDriver driver = new ChromeDriver();
+						
+
+		//to maximize the browser 
+		driver.manage().window().maximize();
+  
+		//to load application url
+		driver.get("http://leafground.com/");
+		driver.findElementByLinkText("Table").click();
+		int rowCount = driver.findElementsByXPath("//table[@id='table_id']//tr").size();
+		
+		for (int i = 1; i <=rowCount; i++) {
+			
+			int cellCount = driver.findElementsByXPath("//table[@id='table_id']//tr["+i+"]/td").size();
+			
+			for (int j = 1; j <= cellCount; j++) {
+				
+				String text = driver.findElementByXPath("//table[@id='table_id']//tr["+i+"]/td["+j+"]").getText();
+				System.out.println(text);
+		}
+		}
+	}
+
+}
