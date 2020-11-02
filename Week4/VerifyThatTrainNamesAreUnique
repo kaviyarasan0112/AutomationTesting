@@ -1,0 +1,103 @@
+package week4.day1;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class VerifyTrainNamesAreUnique {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		
+		System.setProperty("webdriver.chrome.driver", "./ChromeDriver/chromedriver.exe");
+		
+		String property = System.getProperty("webdriver.chrome.driver");
+		
+		System.out.println(property);
+					
+		//To open Chrome Browser
+		ChromeDriver driver = new ChromeDriver();
+						
+
+		//to maximize the browser 
+		driver.manage().window().maximize();
+		driver.get("https://erail.in/");
+		Thread.sleep(3000);
+		driver.findElementById("chkSelectDateOnly").click();
+		
+		WebElement fromStation = driver.findElementById("txtStationFrom");
+		fromStation.clear();
+		fromStation.sendKeys("ms");
+		Thread.sleep(3000);
+		fromStation.sendKeys(Keys.TAB);
+		Thread.sleep(3000);
+		
+		WebElement toStation = driver.findElementById("txtStationTo");
+		toStation.clear();
+		toStation.sendKeys("mdu");
+		Thread.sleep(2000);
+		toStation.sendKeys(Keys.TAB);
+		Thread.sleep(2000);
+		
+		/*
+		 * //1 ST METHOD
+		 * 
+		 * //To get the train names
+		 * 
+		 * List<WebElement> trainNames = driver.
+		 * findElementsByXPath("//table[@class='DataTable TrainList TrainListHeader']//tr"
+		 * ); int trainNamesRowCount = trainNames.size();
+		 * System.out.println(trainNamesRowCount);
+		 * 
+		 * for (int i = 1; i <=trainNamesRowCount; i++) { String text = driver.
+		 * findElementByXPath("//table[@class='DataTable TrainList TrainListHeader']//tr["
+		 * +i+"]/td").getText(); System.out.println(text);
+		 * 
+		 * }
+		 * 
+		 * //Comparing the list value with set to confirm whether the values are unique
+		 * or not
+		 * 
+		 * Set<WebElement> trainNames2=new HashSet<WebElement>();
+		 * 
+		 * for (WebElement eachTrainName : trainNames) { trainNames2.add(eachTrainName);
+		 * } int sizeOfTrainNames2 = trainNames2.size();
+		 * System.out.println(sizeOfTrainNames2);
+		 * 
+		 * if(trainNamesRowCount==sizeOfTrainNames2) {
+		 * System.out.println("Train Names are unique");
+		 * 
+		 * }
+		 */	
+		
+		//2nd method
+		List<String> trainNames=new ArrayList<String>();
+		int sizeOfList = driver.findElementsByXPath("//table[@class='DataTable TrainList TrainListHeader']//tr").size();
+		System.out.println("Size of List"+sizeOfList);
+		
+		for (int i = 1; i <=sizeOfList; i++) {
+			String text = driver.findElementByXPath("//table[@class='DataTable TrainList TrainListHeader']//tr["+i+"]/td[2]").getText();
+			trainNames.add(text);
+		}
+		//System.out.println("TrainNames using List"+trainNames);
+		
+		Set<String > trainNames2=new LinkedHashSet<String>();
+		trainNames2.addAll(trainNames);
+		//System.out.println("TrainNames using set"+trainNames2);
+		int sizeOfSet = trainNames2.size();
+		System.out.println("Size of set"+sizeOfSet);
+		
+		if(sizeOfList==sizeOfSet) {
+			System.out.println("The values are not unique");
+		}
+		else {
+			System.out.println("Duplicate values");
+		}
+	}
+}
