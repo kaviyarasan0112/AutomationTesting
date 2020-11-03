@@ -1,0 +1,42 @@
+package week4.day1;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+public class LearnAUI {
+
+	public static void main(String[] args) throws InterruptedException {
+
+		System.setProperty("webdriver.chrome.driver", "./ChromeDriver/chromedriver.exe");
+		
+		String property = System.getProperty("webdriver.chrome.driver");
+		
+		System.out.println(property);
+					
+		//To open Chrome Browser
+		ChromeDriver driver = new ChromeDriver();
+						
+
+		//to maximize the browser 
+		driver.manage().window().maximize();
+		driver.get("https://www.snapdeal.com/");
+		//to get inside frame
+		WebElement mensFashion = driver.findElementByXPath("(//a[contains(@class,'menuLinks leftCategoriesProduct ')])[6]/span");
+		
+		Actions builder=new Actions(driver);
+		//Mouse Hover to click on element mensFashion
+		builder.moveToElement(mensFashion).perform();
+		
+		Thread.sleep(4000);
+		driver.findElementByXPath("(//span[text()='Shirts'])[2]").click();
+		WebElement firstProduct = driver.findElementByXPath("(//img[@class='product-image '])[1]");
+		builder.moveToElement(firstProduct).perform();
+		Thread.sleep(2000);
+		driver.findElementByXPath("(//div[contains(text(),'Quick View')])[1]").click();
+		Thread.sleep(4000);
+		driver.close();
+		
+	}
+
+}
