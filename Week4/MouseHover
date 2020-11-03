@@ -30,6 +30,7 @@ public class LearnAUI {
 		
 		Thread.sleep(4000);
 		driver.findElementByXPath("(//span[text()='Shirts'])[2]").click();
+			//Mouse Hover to click on element firstProduct
 		WebElement firstProduct = driver.findElementByXPath("(//img[@class='product-image '])[1]");
 		builder.moveToElement(firstProduct).perform();
 		Thread.sleep(2000);
