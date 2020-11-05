@@ -1,0 +1,49 @@
+package week4.day1;
+
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class AlertLeafGround {
+
+	public static void main(String[] args) throws InterruptedException {
+		System.setProperty("webdriver.chrome.driver", "./ChromeDriver/chromedriver.exe");
+		String property = System.getProperty("webdriver.chrome.driver");
+		System.out.println(property);			
+		//To open Chrome Browser
+		ChromeDriver driver = new ChromeDriver();
+		//to maximize the browser 
+		driver.manage().window().maximize();
+		driver.get("http://leafground.com/");
+		driver.findElementByXPath("//h5[contains(text(),'Alert')]").click();
+		
+		/*
+		 * //Simple Alert
+		 * driver.findElementByXPath("//button[contains(text(),'Alert')]").click();
+		 * Thread.sleep(3000); Alert alert = driver.switchTo().alert(); String text =
+		 * alert.getText(); System.out.println(text); alert.accept();
+		 * Thread.sleep(3000); driver.close();
+		 */
+		//Confirmation alert
+		/*
+		 * driver.findElementByXPath("//button[contains(text(),'Confirm Box')]").click()
+		 * ; Thread.sleep(3000); Alert alert = driver.switchTo().alert(); String text =
+		 * alert.getText(); System.out.println(text); //alert.accept(); alert.dismiss();
+		 * Thread.sleep(3000); driver.close();
+		 */
+		//Prompt Alert
+		/*
+		 * driver.findElementByXPath("//button[contains(text(),'Prompt Box')]").click();
+		 * Thread.sleep(3000); Alert alert = driver.switchTo().alert();
+		 * Thread.sleep(3000); alert.sendKeys("TestText"); String text =
+		 * alert.getText(); System.out.println(text); alert.accept(); //alert.dismiss();
+		 * Thread.sleep(5000); driver.close();
+		 */
+		//Sweet alert
+		driver.findElementByXPath("//button[contains(text(),'Sweet Alert')]").click();
+		Thread.sleep(3000);
+		driver.findElementByXPath("//button[contains(text(),'OK')]").click();
+		driver.close();
+		
+	}
+
+}
