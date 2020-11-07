@@ -1,0 +1,57 @@
+package week4.day1;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+public class WindowHandleLeafGroung {
+
+	public static void main(String[] args) throws InterruptedException {
+
+		System.setProperty("webdriver.chrome.driver", "./ChromeDriver/chromedriver.exe");
+		String property = System.getProperty("webdriver.chrome.driver");
+		System.out.println(property);
+		//To disable notifications of the browser
+		ChromeOptions options=new ChromeOptions();
+		options.addArguments("--disable-notofications");			
+		//To open Chrome Browser
+		ChromeDriver driver = new ChromeDriver(options);
+		//to maximize the browser 
+		driver.manage().window().maximize();
+		driver.get("http://leafground.com/home.html");
+		//Thread.sleep(3000);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.findElementByXPath("(//a[@class='wp-categories-link maxheight'])[11]").click();
+		//Thread.sleep(3000);
+		driver.findElementByXPath("//button[@id='home']").click();
+		Set<String> windowHandles = driver.getWindowHandles();
+		List<String> listHandles=new ArrayList<String>(windowHandles);
+		String secondWindow = listHandles.get(1);
+		//Thread.sleep(3000);
+		driver.switchTo().window(secondWindow);
+		driver.manage().window().maximize();
+		//Thread.sleep(3000);
+		driver.findElementByXPath("(//a[@class='wp-categories-link maxheight'])[11]").click();
+		//Thread.sleep(3000);
+		driver.findElementByXPath("//button[@id='home']").click();
+		Set<String> windowHandles2 = driver.getWindowHandles();
+		List<String> listHandles2=new ArrayList<String>(windowHandles2);
+		String thirdwindow = listHandles2.get(2);
+		//Thread.sleep(3000);
+		driver.switchTo().window(thirdwindow);
+		driver.close();
+		/*
+		 * String firstWindow = listHandles.get(0);
+		 * driver.switchTo().window(firstWindow);
+		 */
+		
+		
+		
+
+	}
+
+}
