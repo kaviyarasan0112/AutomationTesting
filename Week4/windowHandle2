@@ -1,0 +1,55 @@
+package week4.day1;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+public class WindowHandle {
+
+	public static void main(String[] args) throws InterruptedException {
+		
+		System.setProperty("webdriver.chrome.driver", "./ChromeDriver/chromedriver.exe");
+		String property = System.getProperty("webdriver.chrome.driver");
+		System.out.println(property);
+		//To disable notifications of the browser
+		ChromeOptions options=new ChromeOptions();
+		options.addArguments("--disable-notofications");			
+		//To open Chrome Browser
+		ChromeDriver driver = new ChromeDriver(options);
+		//to maximize the browser 
+		driver.manage().window().maximize();
+		driver.get("http://grclopsnlbm910/OPSPortal/EnvironmentPage.aspx?EnvironmentID=213");
+		Thread.sleep(2000);
+		driver.findElementByXPath("//a[contains(text(),'https://SiriusUKFTA2.uk1test.group.internal/FTA2/RRP.UI.Web/Default.aspx')]").click();
+		//To store the window Handle
+		Set<String> windowHandle = driver.getWindowHandles();
+		
+		for (String eachWindowHandle : windowHandle) {
+			System.out.println(eachWindowHandle);
+			
+		}
+		//to get the window handle storing it in list
+		List<String> listHandle=new ArrayList<String>(windowHandle);
+		String SecondWindow = listHandle.get(1);
+		//To go to the secondWindow, we have to use windlow() method
+		driver.switchTo().window(SecondWindow);
+		String titleOfSecondWindow = driver.getTitle();
+		System.out.println(titleOfSecondWindow);
+		//driver.close();
+		//To go to the firstWindow, we have to use window() method
+		String firstWindow = listHandle.get(0);
+		driver.switchTo().window(firstWindow);
+		String titleOfFirstWindow = driver.getTitle();
+		System.out.println(titleOfFirstWindow);
+		driver.close();
+		
+		
+		
+		
+		
+	}
+
+}
