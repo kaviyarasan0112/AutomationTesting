@@ -1,0 +1,30 @@
+package week4.day1;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+public class DragAndDropLeafGroundApp {
+
+	public static void main(String[] args) {
+		
+		System.setProperty("webdriver.chrome.driver", "./ChromeDriver/chromedriver.exe");
+		String property = System.getProperty("webdriver.chrome.driver");
+		System.out.println(property);
+		//To open Chrome Browser
+		ChromeDriver driver = new ChromeDriver();
+		//to maximize the browser 
+		driver.manage().window().maximize();
+		//to load application url
+		driver.get("http://leafground.com/");
+		driver.findElementByXPath("//h5[contains(text(),'Draggable')]/parent::a").click();
+		
+		Actions builder=new Actions(driver);
+		WebElement source = driver.findElementByXPath("//div[@id='draggable']");
+		int x = source.getLocation().getX();
+		int y = source.getLocation().getY();
+		builder.dragAndDropBy(source, 100, 200).perform();
+				
+	}
+
+}
