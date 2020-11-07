@@ -1,0 +1,40 @@
+package week4.day1;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
+
+public class DragAndDrop {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver", "./ChromeDriver/chromedriver.exe");
+		
+		String property = System.getProperty("webdriver.chrome.driver");
+		
+		System.out.println(property);
+					
+		//To open Chrome Browser
+		ChromeDriver driver = new ChromeDriver();
+		//to maximize the browser 
+		driver.manage().window().maximize();
+		driver.get("https://jqueryui.com/sortable/");
+		//to get inside frame
+		driver.switchTo().frame(0);
+		Actions builder=new Actions(driver);
+		Thread.sleep(3000);
+		WebElement source = driver.findElementByXPath("//ul[@id='sortable']/li[1]");
+		WebElement target = driver.findElementByXPath("//ul[@id='sortable']/li[4]");
+		Thread.sleep(3000);
+	
+		builder.dragAndDrop(source, target).perform();
+		
+	
+	
+		
+		
+
+	}
+
+}
