@@ -1,0 +1,39 @@
+package week4.day1;
+
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+public class FrameW3Schools {
+
+	public static void main(String[] args) throws InterruptedException {
+		System.setProperty("webdriver.chrome.driver", "./ChromeDriver/chromedriver.exe");
+		String property = System.getProperty("webdriver.chrome.driver");
+		System.out.println(property);
+		//To disable notifications of the browser
+		ChromeOptions options=new ChromeOptions();
+		options.addArguments("--disable-notofications");			
+		//To open Chrome Browser
+		ChromeDriver driver = new ChromeDriver(options);
+		//to maximize the browser 
+		driver.manage().window().maximize();
+		driver.get("http://www.w3schools.com/js/tryit.asp?filename=tryjs_prompt");
+		//driver.switchTo().alert();
+		Thread.sleep(3000);
+		driver.findElementByXPath("//div[@id='accept-choices']").click();
+		Thread.sleep(3000);
+		driver.switchTo().frame("iframeResult");
+		driver.findElementByXPath("//button[contains(text(),'Try it')]").click();
+		
+		Alert alert = driver.switchTo().alert();
+		Thread.sleep(3000);
+		alert.sendKeys("TestText");
+		alert.accept();
+		
+		Thread.sleep(3000);
+		driver.close();
+		
+
+	}
+
+}
