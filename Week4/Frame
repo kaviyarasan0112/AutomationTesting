@@ -1,0 +1,47 @@
+package week4.day1;
+
+import java.util.List;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+public class FrameLeafGround {
+
+	public static void main(String[] args) throws InterruptedException {
+
+		System.setProperty("webdriver.chrome.driver", "./ChromeDriver/chromedriver.exe");
+		String property = System.getProperty("webdriver.chrome.driver");
+		System.out.println(property);
+		//To disable notifications of the browser
+		ChromeOptions options=new ChromeOptions();
+		options.addArguments("--disable-notofications");			
+		//To open Chrome Browser
+		ChromeDriver driver = new ChromeDriver(options);
+		//to maximize the browser 
+		driver.manage().window().maximize();
+		driver.get("http://leafground.com/pages/frame.html");
+		//frame
+		/*
+		 * driver.switchTo().frame(0);
+		 * driver.findElementByXPath("//button[contains(text(),'Click Me')]").click();
+		 * Thread.sleep(3000); driver.close();
+		 */
+		//Nested Frame
+		/*
+		 * driver.switchTo().frame(1); driver.switchTo().frame(0); Thread.sleep(3000);
+		 * driver.findElementByXPath("//button[@id='Click1']").click();
+		 * Thread.sleep(3000); driver.close();
+		 */
+		//to get total number of frames
+		List<WebElement> totalNumberOfTagName = driver.findElementsByTagName("iframe");
+		int size = totalNumberOfTagName.size();
+		System.out.println(size);
+		driver.close();
+		
+		
+		
+
+	}
+
+}
