@@ -1,0 +1,45 @@
+package week5.Day1;
+
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
+
+public class BaseClass {
+	
+	public ChromeDriver driver;
+	public  String excelFilename;
+	
+	@Parameters({"username","password"})
+	@BeforeMethod
+	public void login(String userName,String password) {
+		
+		System.setProperty("webdriver.chrome.driver", "./ChromeDriver/chromedriver.exe");
+		//String property = System.getProperty("webdriver.chrome.driver");
+		//System.out.println(property);	
+		driver = new ChromeDriver();
+		//to maximize the browser 
+		driver.manage().window().maximize();
+		driver.get("http://leaftaps.com/opentaps/");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.findElementById("username").sendKeys(userName);
+		driver.findElementById("password").sendKeys(password);
+		driver.findElementByClassName("decorativeSubmit").click();
+		driver.findElementByLinkText("CRM/SFA").click();
+	}
+	
+	@AfterMethod
+	public void close() {
+		driver.close();
+	}
+	
+	@DataProvider(name = "Data")
+	public String[][] sendData() throws IOException {
+		return ReadExcel.ReadData(excelFilename);
+	}
+
+}
