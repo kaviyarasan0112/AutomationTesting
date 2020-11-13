@@ -1,0 +1,49 @@
+package week5.Day1;
+
+import java.io.IOException;
+
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+public class ApachePOI {
+
+	public static void main(String[] args) throws IOException {
+		// to get into the workbook
+		XSSFWorkbook wb=new XSSFWorkbook("./TestData/CreateLeadTestData.xlsx");
+		//To get the sheetName
+		XSSFSheet sheet = wb.getSheet("Sheet1");
+		//To get the sheet using index
+		//XSSFSheet sheetAt = wb.getSheetAt(0);
+		//To get into the row of the sheet
+		XSSFRow row = sheet.getRow(1);
+		//To get the value from the cell
+		XSSFCell cell = row.getCell(1);
+		//To get the values from the cell
+		String stringCellValue = cell.getStringCellValue();
+		System.out.println(stringCellValue);
+		
+		//To get the rowcount of the excelSheet
+		//getLastRowNum() - while getting the row count it will exclude the header 
+		int lastRowNum = sheet.getLastRowNum();
+		System.out.println(lastRowNum);
+		
+		//To get the all the row values, we can use getPhysicalNumberOfRows method
+		int physicalNumberOfRows = sheet.getPhysicalNumberOfRows();
+		System.out.println(physicalNumberOfRows);
+		
+		//to get the count of column
+		short lastCellNum = sheet.getRow(0).getLastCellNum();
+		System.out.println(lastCellNum);
+		
+		for (int i = 0; i <physicalNumberOfRows ; i++) {
+			for (int j = 0; j < lastCellNum; j++) {
+				String sheetvalues = sheet.getRow(i).getCell(j).getStringCellValue();
+				System.out.println(sheetvalues);	
+			}
+			
+		}
+	}
+
+}
