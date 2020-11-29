@@ -1,0 +1,53 @@
+package week5.Day1;
+
+import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+public class CreateLead extends BaseClass {
+
+	@BeforeTest
+	public void setFile() {
+		
+		excelFilename = "CreateLeadTD";
+	}
+
+	@Test(dataProvider = "Data")
+	public void runCreateLead(String companyName, String firstName, String lastName) {
+		// WebDriverManager.chromedriver().setup();
+		// To open Chrome Browser
+		String actualTitle=driver.getTitle();
+		Assert.assertEquals(actualTitle, "My Home | opentaps CRM");
+		
+		driver.findElementByLinkText("Leads").click();
+		driver.findElementByLinkText("Create Lead").click();
+		driver.findElementById("createLeadForm_companyName").sendKeys(companyName);
+		driver.findElementById("createLeadForm_firstName").sendKeys(firstName);
+		driver.findElementById("createLeadForm_lastName").sendKeys(lastName);
+		driver.findElementByName("submitButton").click();
+
+	}
+
+	
+	/*
+	 * @DataProvider(name = "Data") 
+	 * public String[][] sendData() throws IOException
+	 * {
+	 * 
+	 * //String[][] data = ReadExcel.ReadData();
+	 * 
+	 * 
+	 * String[][] data = new String[3][3];
+	 * 
+	 * data[0][0] = "Testleaf"; data[0][1] = "Baji"; data[0][2] = "B";
+	 * 
+	 * data[1][0] = "TL"; data[1][1] = "Sam"; data[1][2] = "E";
+	 * 
+	 * data[2][0] = "Test"; data[2][1] = "Curran"; data[2][2] = "z";
+	 */
+	  
+	  
+	  //return data; return ReadExcel.ReadData(); }
+	  
+	 
+}
